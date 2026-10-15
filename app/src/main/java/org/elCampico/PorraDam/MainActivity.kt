@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 import org.elCampico.PorraDam.ui.auth.login.PantallaLogin
 import org.elCampico.PorraDam.ui.auth.register.PantallaRegistro
+import org.elCampico.PorraDam.ui.main.sala.PantallaSala
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
                                 Toast.makeText(
                                     this@MainActivity, "Hola, $usuario", Toast.LENGTH_SHORT
                                 ).show()
+                                navController.navigate("sala")
                             },
                             onIrRegistro = { navController.navigate("registro") }
                         )
@@ -37,10 +39,23 @@ class MainActivity : ComponentActivity() {
                                 Toast.makeText(
                                     this@MainActivity, "Hola, $usuario", Toast.LENGTH_SHORT
                                 ).show()
+                                navController.navigate("login")
                             },
                             onIrALogin = { navController.popBackStack() }
                         )
                     }
+
+                    composable("sala") {
+                        PantallaSala(
+                            onEntrarSala = { usuario, _ ->
+                                Toast.makeText(
+                                    this@MainActivity, "Hola, $usuario", Toast.LENGTH_SHORT
+                                ).show()
+                                navController.navigate("login")
+                            }
+                        )
+                    }
+
                 }
             }
         }
