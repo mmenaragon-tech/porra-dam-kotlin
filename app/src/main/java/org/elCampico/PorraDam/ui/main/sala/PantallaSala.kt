@@ -49,16 +49,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.elCampico.PorraDam.R
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
+import org.elCampico.PorraDam.ui.utils.FondoPantalla
 
 val Montserrat = FontFamily(
     Font(R.font.montserrat_regular, FontWeight.Normal),
     Font(R.font.montserrat_bold, FontWeight.Bold),
     Font(R.font.montserrat_black, FontWeight.Black)
 )
-private val Oscurecido = Brush.verticalGradient(
-    listOf(Color.Black.copy(alpha = 0.3f), Color.Black.copy(alpha = 0.75f))
-)
-
 @Composable
 fun PantallaSala(
     onEntrarSala: (alias: String, sala: String) -> Unit,
@@ -67,13 +64,7 @@ fun PantallaSala(
     var alias by rememberSaveable { mutableStateOf("") }
     var sala by rememberSaveable { mutableStateOf("") }
     Box(modifier = modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(R.drawable.fondo_pantalla_hd),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = modifier.matchParentSize()
-        )
-        Box(Modifier.matchParentSize().background(Oscurecido))
+        FondoPantalla()
         Column(
             modifier = modifier.fillMaxSize()
                 .systemBarsPadding()

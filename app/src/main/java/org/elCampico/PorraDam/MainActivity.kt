@@ -51,10 +51,18 @@ class MainActivity : ComponentActivity() {
                                 Toast.makeText(
                                     this@MainActivity, "Hola, $usuario", Toast.LENGTH_SHORT
                                 ).show()
-                                navController.navigate("login")
+                                navController.navigate("jornada")
                             }
                         )
                     }
+/*
+                    composable("jornada") {
+                        PantallaJornada(
+
+                        )
+                    }
+
+ */
 
                 }
             }
