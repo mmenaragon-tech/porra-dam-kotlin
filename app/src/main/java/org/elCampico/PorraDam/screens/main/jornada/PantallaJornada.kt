@@ -1,36 +1,36 @@
-package org.elCampico.PorraDam.ui.main.jornada
+package org.elCampico.PorraDam.screens.main.jornada
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Card
-import androidx.compose.material3.Label
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import org.elCampico.PorraDam.ui.main.data.Partido
-import org.elCampico.PorraDam.ui.main.data.PronosticoJornada
-import org.elCampico.PorraDam.ui.main.data.PronosticoPartido
+import org.elCampico.PorraDam.screens.main.data.Partido
+import org.elCampico.PorraDam.screens.main.data.PronosticoJornada
+import org.elCampico.PorraDam.screens.main.data.PronosticoPartido
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
-import org.elCampico.PorraDam.ui.auth.login.PantallaLogin
-import org.elCampico.PorraDam.ui.main.data.Equipo
+import org.elCampico.PorraDam.screens.main.data.Equipo
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 import org.elCampico.PorraDam.ui.utils.FondoPantalla
-import org.w3c.dom.Text
 
 @Composable
 fun PantallaJornada(
+    modifier : Modifier = Modifier,
+    /*
     numero : Int? = 1,
     partidos : List<PronosticoPartido>,
-    onGuardarPronostico : (pronostico : PronosticoJornada) -> Unit,
-    modifier : Modifier = Modifier
+    onGuardarPronostico : (pronostico : PronosticoJornada) -> Unit
+
+     */
+
 ) {
+    /*
     var golesLocal by rememberSaveable(numero) { mutableStateOf(List(partidos.size) { "" }) }
     var golesVisitante by rememberSaveable(numero) { mutableStateOf(List(partidos.size) { "" }) }
-
+    */
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -70,9 +70,12 @@ fun PantallaJornadaPreview() {
 
     PorraDamTheme {
         PantallaJornada(
+            /*
             numero = 12,
             partidos = partidos,
             onGuardarPronostico = { }
+            
+             */
         )
     }
 }

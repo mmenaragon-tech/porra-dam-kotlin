@@ -1,7 +1,5 @@
-package org.elCampico.PorraDam.ui.main.sala
+package org.elCampico.PorraDam.screens.main.sala
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +17,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,10 +31,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
@@ -57,8 +51,8 @@ val Montserrat = FontFamily(
     Font(R.font.montserrat_black, FontWeight.Black)
 )
 @Composable
-fun PantallaSala(
-    onEntrarSala: (alias: String, sala: String) -> Unit,
+fun PantallaBienvenida(
+    onEntrar: (alias: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var alias by rememberSaveable { mutableStateOf("") }
@@ -141,7 +135,7 @@ fun PantallaSala(
                     )
                     Spacer(modifier = modifier.padding(15.dp))
                     Button(
-                        onClick = { onEntrarSala(alias, sala) },
+                        onClick = { onEntrar(alias.trim()) },
                         enabled = alias.isNotBlank() && sala.isNotBlank(),
                         modifier = modifier.fillMaxWidth().height(60.dp),
                         colors = ButtonDefaults.buttonColors(
@@ -164,6 +158,6 @@ fun PantallaSala(
 @Composable
 private fun PantallaSalaPreview() {
     PorraDamTheme {
-        PantallaSala(onEntrarSala = { _, _ ->} )
+        PantallaBienvenida(onEntrar = { _ ->} )
     }
 }
