@@ -1,4 +1,4 @@
-package org.elCampico.PorraDam.screens.main.data
+package org.elCampico.PorraDam.data
 
 data class Marcador(
     private var local : Int? = null,

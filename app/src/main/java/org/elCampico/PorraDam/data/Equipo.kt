@@ -1,4 +1,4 @@
-package org.elCampico.PorraDam.screens.main.data
+package org.elCampico.PorraDam.data
 
 import kotlinx.serialization.Serializable
 
