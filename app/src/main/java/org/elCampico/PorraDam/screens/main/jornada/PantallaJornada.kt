@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,44 +21,36 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import org.elCampico.PorraDam.data.Partido
-import org.elCampico.PorraDam.data.PronosticoPartido
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.elCampico.PorraDam.data.Equipo
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
-import org.elCampico.PorraDam.ui.utils.FondoPantalla
 
 @Composable
 fun PantallaJornada(
-    modifier : Modifier = Modifier,
-
-    /*
-    numero : Int? = 1,
-    partidos : List<PronosticoPartido>,
-    onGuardarPronostico : (pronostico : PronosticoJornada) -> Unit
-
-     */
-
+    modifier: Modifier = Modifier
 ) {
-    /*
-    var golesLocal by rememberSaveable(numero) { mutableStateOf(List(partidos.size) { "" }) }
-    var golesVisitante by rememberSaveable(numero) { mutableStateOf(List(partidos.size) { "" }) }
-    */
-    var golesLocal by rememberSaveable { mutableStateOf(0) }
-    Column(
-        modifier = modifier.fillMaxSize()
-    ) {
+    val partidos = listOf(
+        "Atlético Madrid" to "Real Madrid",
+        "FC Barcelona" to "Villarreal CF",
+        "Sevilla FC" to "Real Sociedad",
+        "Betis" to "Valencia CF",
+        "Athletic Club" to "Celta de Vigo"
+    )
+
+    // Un valor de goles por partido y equipo
+    val golesLocal = remember { mutableStateListOf(*Array(partidos.size) { 0 }) }
+    val golesVisitante = remember { mutableStateListOf(*Array(partidos.size) { 0 }) }
+
+    // Solo el contenedor raíz usa "modifier" (trae el padding del Scaffold)
+    Column(modifier = modifier.fillMaxSize()) {
         Text(
             "Jornada 1",
             modifier = Modifier.padding(horizontal = 18.dp),
@@ -75,7 +68,8 @@ fun PantallaJornada(
             horizontalArrangement = Arrangement.spacedBy(7.dp)
         ) {
             Icon(
-                Icons.Default.CalendarMonth, "Jornada",
+                Icons.Default.CalendarMonth,
+                contentDescription = "Jornada",
                 tint = Color.White
             )
             Text(
@@ -84,37 +78,81 @@ fun PantallaJornada(
             )
         }
 
-        Box(
-            modifier = Modifier.fillMaxHeight().
-            background(Color.White)
-        ){
-            Box() {
-                Row() { SelectorGoles(
-                    goles = golesLocal,
-                    onGolesChange = { golesLocal = it }
-                )}
-                Row() { }
+        // Panel blanco con los partidos
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.White)
+                .padding(6.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            partidos.forEachIndexed { i, (local, visitante) ->
+                PartidoItem(
+                    local = local,
+                    visitante = visitante,
+                    golesLocal = golesLocal[i],
+                    golesVisitante = golesVisitante[i],
+                    onGolesLocalChange = { golesLocal[i] = it },
+                    onGolesVisitanteChange = { golesVisitante[i] = it }
+                )
             }
-            Box() {
-                Row() { }
-                Row() { }
-            }
-            Box() {
-                Row() { }
-                Row() { }
-            }
-            Box() {
-                Row() { }
-                Row() { }
-            }
-            Box() {
-                Row() { }
-                Row() { }
-            }
-            Button(onClick = {}) {
 
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(horizontal = 20.dp, vertical = 15.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Button(
+                    onClick = { /* guardar pronósticos */ },
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Text(
+                        "Guardar pronósticos",
+                        fontSize = 20.sp
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+fun PartidoItem(
+    local: String,
+    visitante: String,
+    golesLocal: Int,
+    golesVisitante: Int,
+    onGolesLocalChange: (Int) -> Unit,
+    onGolesVisitanteChange: (Int) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, Color.LightGray, RoundedCornerShape(8.dp))
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        FilaEquipo(local, golesLocal, onGolesLocalChange)
+        FilaEquipo(visitante, golesVisitante, onGolesVisitanteChange)
+    }
+}
+
+@Composable
+fun FilaEquipo(
+    nombre: String,
+    goles: Int,
+    onGolesChange: (Int) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(nombre, color = Color.Black)
+        SelectorGoles(goles = goles, onGolesChange = onGolesChange)
     }
 }
 
@@ -140,12 +178,18 @@ fun SelectorGoles(
                 .border(1.dp, Color.LightGray, forma)
                 .clip(forma)
                 .clickable(enabled = goles > 0) { onGolesChange(goles - 1) }
-                .padding(horizontal = 10.dp, vertical = 6.dp)
+                .padding(horizontal = 10.dp, vertical = 2.dp)
         ) {
-            Text("$goles", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Text(
+                "$goles",
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
             Icon(
                 Icons.Default.KeyboardArrowDown,
                 contentDescription = "Restar gol",
+                tint = Color.Black,
                 modifier = Modifier.size(16.dp)
             )
         }
@@ -154,7 +198,7 @@ fun SelectorGoles(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .size(32.dp)
+                .size(28.dp)
                 .border(1.dp, Color.LightGray, forma)
                 .clip(forma)
                 .clickable(enabled = goles < max) { onGolesChange(goles + 1) }
@@ -162,51 +206,17 @@ fun SelectorGoles(
             Icon(
                 Icons.Default.KeyboardArrowUp,
                 contentDescription = "Sumar gol",
+                tint = Color.Black,
                 modifier = Modifier.size(20.dp)
             )
         }
     }
 }
 
-@Composable
-fun PartidosJornada(jornada: String, jornadas: Map<String, ArrayList<Partido>>) {
-    jornadas[jornada]?.forEach { partido ->
-       /* Card() {
-            Label() { }
-        }*/
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun PantallaJornadaPreview() {
-    val partidos = listOf(
-        PronosticoPartido(
-            idPartido = 1,
-            equipoLocal = Equipo(nombre = "Real Madrid", escudo = "", abreviatura = "RM"),
-            equipoVisitante = Equipo(nombre = "Barcelona", escudo = "", abreviatura = "FCB")
-        ),
-        PronosticoPartido(
-            idPartido = 2,
-            equipoLocal = Equipo(nombre = "Sevilla", escudo = "", abreviatura = "SFC"),
-            equipoVisitante = Equipo(nombre = "Valencia", escudo = "", abreviatura = "VCF")
-        ),
-        PronosticoPartido(
-            idPartido = 3,
-            equipoLocal = Equipo(nombre = "Betis", escudo = "", abreviatura = "BET"),
-            equipoVisitante = Equipo(nombre = "Villarreal", escudo = "", abreviatura = "VRF")
-        )
-    )
-
     PorraDamTheme {
-        PantallaJornada(
-            /*
-            numero = 12,
-            partidos = partidos,
-            onGuardarPronostico = { }
-            
-             */
-        )
+        PantallaJornada()
     }
 }
-
