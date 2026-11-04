@@ -1,7 +1,5 @@
-package org.elCampico.PorraDam.ui.auth.login
+package org.elCampico.PorraDam.screens.auth.login
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,24 +37,19 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.elCampico.PorraDam.R
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
+import org.elCampico.PorraDam.ui.utils.FondoPantalla
 
 
 val Montserrat = FontFamily(
@@ -64,9 +57,7 @@ val Montserrat = FontFamily(
     Font(R.font.montserrat_bold, FontWeight.Bold),
     Font(R.font.montserrat_black, FontWeight.Black)
 )
-private val Oscurecido = Brush.verticalGradient(
-    listOf(Color.Black.copy(alpha = 0.3f), Color.Black.copy(alpha = 0.75f))
-)
+
 @Composable
 fun PantallaLogin(
     onEntrar: (usuario: String, clave: String) -> Unit,
@@ -77,13 +68,7 @@ fun PantallaLogin(
     var clave by rememberSaveable { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     Box(modifier = modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(R.drawable.fondo_pantalla_hd),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.matchParentSize()
-        )
-        Box(Modifier.matchParentSize().background(Oscurecido))
+        FondoPantalla()
         Column(
             modifier = Modifier
                 .fillMaxSize()
