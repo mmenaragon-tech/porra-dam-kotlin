@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -100,7 +103,7 @@ fun PantallaResultados(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(horizontal = 18.dp, vertical = 8.dp),
             color = Color.Black
         )
-
+        /*
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -155,6 +158,55 @@ fun PantallaResultados(modifier: Modifier = Modifier) {
             }
         }
 
+        */
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.White)
+                .padding(6.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(resultados.zip(porras)) { (resultado, pronostico) ->
+                ResultadoPartido(resultado, pronostico)
+            }
+            item {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .clip(RoundedCornerShape(15.dp))
+                        .fillMaxWidth()
+                        .background(color = Color(0xFFEEEEEE))
+                        .padding(12.dp)
+
+                ) {
+                    Icon(
+                        Icons.Default.Star, "Estrella",
+                        tint = Color.Yellow,
+                        modifier = Modifier.size(38.dp)
+                    )
+                    Text(
+                        "Total jornada",
+                        modifier = Modifier
+                            .padding(horizontal = 5.dp)
+                            .weight(1f)
+                    )
+                    Text(
+                        "+$totalPuntos",
+                        textAlign = TextAlign.End,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(15.dp))
+                            .background(color = Color.White)
+                            .padding(12.dp),
+                        color = colorPuntos,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Black
+                    )
+                }
+            }
+        }
 
     }
 }
