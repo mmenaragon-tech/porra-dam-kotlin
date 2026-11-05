@@ -83,6 +83,7 @@ fun PantallaJornada(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
+                .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
                 .background(Color.White)
                 .padding(6.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
