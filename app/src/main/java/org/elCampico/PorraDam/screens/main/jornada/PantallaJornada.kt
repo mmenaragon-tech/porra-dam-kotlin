@@ -7,11 +7,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
@@ -79,14 +83,16 @@ fun PantallaJornada(
         }
 
         // Panel blanco con los partidos
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
+                .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
                 .background(Color.White)
                 .padding(6.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            /*
             partidos.forEachIndexed { i, (local, visitante) ->
                 PartidoItem(
                     local = local,
@@ -98,6 +104,18 @@ fun PantallaJornada(
                 )
             }
 
+            */
+            itemsIndexed(partidos) { i, (equipo1, equipo2) ->
+                PartidoItem(
+                    local = equipo1,
+                    visitante = equipo2,
+                    golesLocal = golesLocal[i],
+                    golesVisitante = golesVisitante[i],
+                    onGolesLocalChange = { golesLocal[i] = it },
+                    onGolesVisitanteChange = { golesVisitante[i] = it }
+                )
+            }
+            /*
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -113,6 +131,21 @@ fun PantallaJornada(
                         "Guardar pronósticos",
                         fontSize = 20.sp
                     )
+                }
+            }
+
+            */
+
+            item {
+                Button(
+                    onClick = { /* guardar pronósticos */ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp)
+                        .padding(horizontal = 20.dp, vertical = 15.dp)
+
+                ) {
+                    Text("Guardar pronósticos", fontSize = 20.sp)
                 }
             }
         }
