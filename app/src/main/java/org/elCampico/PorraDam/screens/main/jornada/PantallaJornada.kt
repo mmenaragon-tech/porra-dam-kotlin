@@ -1,5 +1,7 @@
 package org.elCampico.PorraDam.screens.main.jornada
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -7,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,23 +32,44 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.elCampico.PorraDam.R
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
+
+
+data class Equipo(
+    val nombre: String,
+    @DrawableRes val escudo: Int
+)
 
 @Composable
 fun PantallaJornada(
     modifier: Modifier = Modifier
 ) {
+    val atletico = Equipo("Atlético Madrid", R.drawable.atm)
+    val realMadrid = Equipo("Real Madrid", R.drawable.rm)
+    val barcelona = Equipo("FC Barcelona", R.drawable.blc)
+    val villarreal = Equipo("Villarreal CF", R.drawable.villa)
+    val sevilla = Equipo("Sevilla FC", R.drawable.sev)
+    val realSociedad = Equipo("Real Sociedad", R.drawable.rs)
+    val betis = Equipo("Betis", R.drawable.betis)
+    val valencia = Equipo("Valencia CF", R.drawable.vlc)
+    val athletic = Equipo("Athletic Club", R.drawable.ath)
+    val celta = Equipo("Celta de Vigo", R.drawable.celta)
+
     val partidos = listOf(
-        "Atlético Madrid" to "Real Madrid",
-        "FC Barcelona" to "Villarreal CF",
-        "Sevilla FC" to "Real Sociedad",
-        "Betis" to "Valencia CF",
-        "Athletic Club" to "Celta de Vigo"
+        atletico to realMadrid,
+        barcelona to villarreal,
+        sevilla to realSociedad,
+        betis to valencia,
+        athletic to celta
     )
+
 
     // Un valor de goles por partido y equipo
     val golesLocal = remember { mutableStateListOf(*Array(partidos.size) { 0 }) }
@@ -107,8 +129,10 @@ fun PantallaJornada(
             */
             itemsIndexed(partidos) { i, (equipo1, equipo2) ->
                 PartidoItem(
-                    local = equipo1,
-                    visitante = equipo2,
+                    escudoLocal = equipo1.escudo,
+                    escudoVisitante = equipo2.escudo,
+                    local = equipo1.nombre,
+                    visitante = equipo2.nombre,
                     golesLocal = golesLocal[i],
                     golesVisitante = golesVisitante[i],
                     onGolesLocalChange = { golesLocal[i] = it },
@@ -154,6 +178,8 @@ fun PantallaJornada(
 
 @Composable
 fun PartidoItem(
+    escudoLocal: Int,
+    escudoVisitante: Int,
     local: String,
     visitante: String,
     golesLocal: Int,
@@ -168,13 +194,14 @@ fun PartidoItem(
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        FilaEquipo(local, golesLocal, onGolesLocalChange)
-        FilaEquipo(visitante, golesVisitante, onGolesVisitanteChange)
+        FilaEquipo(escudoLocal, local, golesLocal, onGolesLocalChange)
+        FilaEquipo(escudoVisitante, visitante, golesVisitante, onGolesVisitanteChange)
     }
 }
 
 @Composable
 fun FilaEquipo(
+    escudo: Int,
     nombre: String,
     goles: Int,
     onGolesChange: (Int) -> Unit
@@ -184,6 +211,17 @@ fun FilaEquipo(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        Box(
+            modifier = Modifier.size(40.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = escudo),
+                contentDescription = "Escudo de $nombre",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
+            )
+        }
         Text(nombre, color = Color.Black)
         SelectorGoles(goles = goles, onGolesChange = onGolesChange)
     }
