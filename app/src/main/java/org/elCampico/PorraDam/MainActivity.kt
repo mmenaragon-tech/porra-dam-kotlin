@@ -20,12 +20,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PorraDamTheme {
-                /*
+
                 PorraApp()
 
-                 */
 
-                Inicio()
             }
         }
     }

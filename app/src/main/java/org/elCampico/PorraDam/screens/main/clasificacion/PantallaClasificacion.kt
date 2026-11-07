@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,11 +34,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.random.Random
 
 data class Usuario(
     val nombre: String,
     val posicion: Int,
-    val puntos: Int
+    val puntos: Int,
+    @DrawableRes val foto: Int? = null
+)
+
+data class ColoresAvatar(
+    val fondo: Color,
+    val letra: Color
+)
+
+val coloresAvatar: Map<Int, ColoresAvatar> = mapOf(
+    0 to ColoresAvatar(Color(0xFFFFEBEE), Color(0xFFC62828)), // rojo
+    1 to ColoresAvatar(Color(0xFFFFF3E0), Color(0xFFE65100)), // naranja
+    2 to ColoresAvatar(Color(0xFFFFF8E1), Color(0xFFF57F17)), // ámbar
+    3 to ColoresAvatar(Color(0xFFE8F5E9), Color(0xFF2E7D32)), // verde
+    4 to ColoresAvatar(Color(0xFFE0F2F1), Color(0xFF00695C)), // verde azulado
+    5 to ColoresAvatar(Color(0xFFE1F5FE), Color(0xFF0277BD)), // azul claro
+    6 to ColoresAvatar(Color(0xFFE8EAF6), Color(0xFF283593)), // índigo
+    7 to ColoresAvatar(Color(0xFFF3E5F5), Color(0xFF6A1B9A)), // morado
+    8 to ColoresAvatar(Color(0xFFFCE4EC), Color(0xFFAD1457)), // rosa
+    9 to ColoresAvatar(Color(0xFFEFEBE9), Color(0xFF4E342E))  // marrón
 )
 @Composable
 fun PantallaClasificacion(
@@ -118,7 +139,7 @@ fun BarraUsuario(usuario: Usuario) {
 
     ) {
         Posicion(usuario.posicion)
-        Avatar()
+        Avatar(usuario)
         Text(
             usuario.nombre,
             Modifier.padding(horizontal = 10.dp).weight(1f)
@@ -172,30 +193,33 @@ fun Posicion(posicion: Int, modifier: Modifier = Modifier) {
 
 @Composable
 fun Avatar(
-    nombre: String,
-    colorFondo: Color,
-    colorLetra: Color,
-    modifier: Modifier = Modifier,
-    @DrawableRes foto: Int? = null
+    usuario: Usuario,
+    modifier: Modifier = Modifier
 ) {
+    val numero = rememberSaveable { Random.nextInt(0, 10) }
+    val colores = coloresAvatar.getValue(numero)
+    if (usuario.foto != null) {
+
+    }
+    Random.nextInt(10)
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .size(36.dp)
             .clip(CircleShape)
-            .background(colorFondo)
+            .background(colores.fondo)
     ) {
-        if (foto != null) {
+        if (usuario.foto != null) {
             Image(
-                painter = painterResource(foto),
-                contentDescription = nombre,
+                painter = painterResource(usuario.foto),
+                contentDescription = usuario.nombre,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
         } else {
             Text(
-                nombre.first().uppercase(),
-                color = colorLetra,
+                usuario.nombre.first().uppercase(),
+                color = colores.letra,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )
