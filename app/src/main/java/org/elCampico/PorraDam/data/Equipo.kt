@@ -1,20 +1,21 @@
 package org.elCampico.PorraDam.data
 
-import kotlinx.serialization.Serializable
+import androidx.annotation.DrawableRes
+import org.elCampico.PorraDam.R
 
-@Serializable
 data class Equipo(
-    private val escudo: String,
-    private val nombre: String,
-    private val abreviatura: String
-) {
-    fun getEscudo() : String {
-        return this.escudo;
-    }
-    fun getNombre() : String {
-        return this.nombre;
-    }
-    fun getAbvt() : String {
-        return this.abreviatura;
-    }
-}
+    val nombre: String,
+    @DrawableRes val escudo: Int
+)
+
+val atletico = Equipo("Atlético Madrid", R.drawable.atm)
+val realMadrid = Equipo("Real Madrid", R.drawable.rm)
+val barcelona = Equipo("FC Barcelona", R.drawable.blc)
+val villarreal = Equipo("Villarreal CF", R.drawable.villa)
+val sevilla = Equipo("Sevilla FC", R.drawable.sev)
+val realSociedad = Equipo("Real Sociedad", R.drawable.rs)
+val betis = Equipo("Betis", R.drawable.betis)
+val valencia = Equipo("Valencia CF", R.drawable.vlc)
+val athletic = Equipo("Athletic Club", R.drawable.ath)
+val celta = Equipo("Celta de Vigo", R.drawable.celta)
+

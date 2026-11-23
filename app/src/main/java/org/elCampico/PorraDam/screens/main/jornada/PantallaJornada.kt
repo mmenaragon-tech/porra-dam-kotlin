@@ -39,38 +39,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.elCampico.PorraDam.R
+import org.elCampico.PorraDam.data.partidos
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 
-
-data class Equipo(
-    val nombre: String,
-    @DrawableRes val escudo: Int
-)
 
 @Composable
 fun PantallaJornada(
     modifier: Modifier = Modifier
 ) {
-    val atletico = Equipo("Atlético Madrid", R.drawable.atm)
-    val realMadrid = Equipo("Real Madrid", R.drawable.rm)
-    val barcelona = Equipo("FC Barcelona", R.drawable.blc)
-    val villarreal = Equipo("Villarreal CF", R.drawable.villa)
-    val sevilla = Equipo("Sevilla FC", R.drawable.sev)
-    val realSociedad = Equipo("Real Sociedad", R.drawable.rs)
-    val betis = Equipo("Betis", R.drawable.betis)
-    val valencia = Equipo("Valencia CF", R.drawable.vlc)
-    val athletic = Equipo("Athletic Club", R.drawable.ath)
-    val celta = Equipo("Celta de Vigo", R.drawable.celta)
-
-    val partidos = listOf(
-        atletico to realMadrid,
-        barcelona to villarreal,
-        sevilla to realSociedad,
-        betis to valencia,
-        athletic to celta
-    )
-
-
     // Un valor de goles por partido y equipo
     val golesLocal = remember { mutableStateListOf(*Array(partidos.size) { 0 }) }
     val golesVisitante = remember { mutableStateListOf(*Array(partidos.size) { 0 }) }
