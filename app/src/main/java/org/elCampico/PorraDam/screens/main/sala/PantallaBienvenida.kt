@@ -46,6 +46,9 @@ import org.elCampico.PorraDam.R
 import org.elCampico.PorraDam.data.model.Sala
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 import org.elCampico.PorraDam.ui.utils.FondoPantalla
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.lifecycle.viewmodel.initializer
 
 val Montserrat = FontFamily(
     Font(R.font.montserrat_regular, FontWeight.Normal),
@@ -54,9 +57,15 @@ val Montserrat = FontFamily(
 )
 @Composable
 fun PantallaBienvenida(
+    salas: List<Sala>,
     onEntrar: (alias: String, sala: Sala) -> Unit,
     modifier: Modifier = Modifier,
-    vm: BienvenidaViewModel = viewModel()
+    vm: BienvenidaViewModel = viewModel(
+        factory = viewModelFactory {
+            initializer { BienvenidaViewModel(salas) }
+        }
+    )
+
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         FondoPantalla()

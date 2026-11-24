@@ -125,10 +125,13 @@ fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
 
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
-        val indices = objeto.getJSONArray("usuarios")
+        val ids = objeto.getJSONArray("usuarios")
         Sala(
             nombre = objeto.getString("nombre"),
-            usuarios = List(indices.length()) { j -> usuarios[indices.getInt(j)] }
+            usuarios = List(ids.length()) { j ->
+                val id = ids.getInt(j)
+                usuarios.first { it.id == id }
+            }
         )
     }
 }

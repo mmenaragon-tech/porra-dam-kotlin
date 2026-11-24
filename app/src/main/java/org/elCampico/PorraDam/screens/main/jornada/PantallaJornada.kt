@@ -59,8 +59,8 @@ fun PantallaJornada(
         vm.cargar(partidos)
     }
     // Un valor de goles por partido y equipo
-    val golesLocal = remember { mutableStateListOf(*Array(vm.partidosEnviados.size) { 0 }) }
-    val golesVisitante = remember { mutableStateListOf(*Array(vm.partidosEnviados.size) { 0 }) }
+    val golesLocal = remember(vm.partidosEnviados.size) { mutableStateListOf(*Array(vm.partidosEnviados.size) { 0 }) }
+    val golesVisitante = remember(vm.partidosEnviados.size) { mutableStateListOf(*Array(vm.partidosEnviados.size) { 0 }) }
 
     // Solo el contenedor raíz usa "modifier" (trae el padding del Scaffold)
     Column(modifier = modifier.fillMaxSize()) {
