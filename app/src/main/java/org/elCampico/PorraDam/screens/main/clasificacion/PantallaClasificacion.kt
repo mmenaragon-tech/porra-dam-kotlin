@@ -1,6 +1,5 @@
 package org.elCampico.PorraDam.screens.main.clasificacion
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,58 +23,37 @@ import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import org.elCampico.PorraDam.data.model.Usuario
+import org.elCampico.PorraDam.model.leerColoresAvatar
+import org.elCampico.PorraDam.model.leerEquipos
+import org.elCampico.PorraDam.model.leerPartidos
+import org.elCampico.PorraDam.model.leerUsuarios
 import kotlin.random.Random
 
-data class Usuario(
-    val nombre: String,
-    val posicion: Int,
-    val puntos: Int,
-    @DrawableRes val foto: Int? = null
-)
 
-data class ColoresAvatar(
-    val fondo: Color,
-    val letra: Color
-)
-
-val coloresAvatar: Map<Int, ColoresAvatar> = mapOf(
-    0 to ColoresAvatar(Color(0xFFFFEBEE), Color(0xFFC62828)), // rojo
-    1 to ColoresAvatar(Color(0xFFFFF3E0), Color(0xFFE65100)), // naranja
-    2 to ColoresAvatar(Color(0xFFFFF8E1), Color(0xFFF57F17)), // ámbar
-    3 to ColoresAvatar(Color(0xFFE8F5E9), Color(0xFF2E7D32)), // verde
-    4 to ColoresAvatar(Color(0xFFE0F2F1), Color(0xFF00695C)), // verde azulado
-    5 to ColoresAvatar(Color(0xFFE1F5FE), Color(0xFF0277BD)), // azul claro
-    6 to ColoresAvatar(Color(0xFFE8EAF6), Color(0xFF283593)), // índigo
-    7 to ColoresAvatar(Color(0xFFF3E5F5), Color(0xFF6A1B9A)), // morado
-    8 to ColoresAvatar(Color(0xFFFCE4EC), Color(0xFFAD1457)), // rosa
-    9 to ColoresAvatar(Color(0xFFEFEBE9), Color(0xFF4E342E))  // marrón
-)
 @Composable
 fun PantallaClasificacion(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    vm: ClasificacionViewModel = viewModel()
 ) {
-    val usuarios = listOf(
-        Usuario("LUCÍA R.", 1, 45),
-        Usuario("PabloDev", 2, 41),
-        Usuario("Nerea_K", 3, 40),
-        Usuario("Tú · mcoma", 4, 38),
-        Usuario("Hugo M.", 5, 35),
-        Usuario("Aitana", 6, 33),
-        Usuario("xavier.dev", 7, 30),
-        Usuario("Iván G.", 8, 27),
-        Usuario("Sara P.", 9, 26),
-        Usuario("Dani_804", 10, 19)
-    )
+    val contexto = LocalContext.current
+    LaunchedEffect(Unit) {
+        val colores = leerColoresAvatar(contexto)
+        vm.cargar(leerUsuarios(contexto, colores))
+    }
     Column(
         modifier = modifier.fillMaxSize()
             .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
@@ -122,7 +100,7 @@ fun PantallaClasificacion(
         LazyColumn(
 
         ) {
-            items(usuarios, key = { it.posicion }) { usuario ->
+            items(vm.usuariosEnviados, key = { it.posicion }) { usuario ->
                 BarraUsuario(usuario)
             }
         }
@@ -196,8 +174,9 @@ fun Avatar(
     usuario: Usuario,
     modifier: Modifier = Modifier
 ) {
+
     val numero = rememberSaveable { Random.nextInt(0, 10) }
-    val colores = coloresAvatar.getValue(numero)
+    val colores = usuario.avatar
     if (usuario.foto != null) {
 
     }

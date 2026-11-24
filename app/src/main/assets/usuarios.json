@@ -1,0 +1,12 @@
+[
+  { "id": 1, "nombre": "LUCÍA R.", "posicion": 1, "puntos": 45, "foto": null, "avatar": 0 },
+  { "id": 2, "nombre": "PabloDev", "posicion": 2, "puntos": 41, "foto": null, "avatar": 1 },
+  { "id": 3, "nombre": "Nerea_K", "posicion": 3, "puntos": 40, "foto": null, "avatar": 2 },
+  { "id": 4, "nombre": "Tú · mcoma", "posicion": 4, "puntos": 38, "foto": null, "avatar": 3 },
+  { "id": 5, "nombre": "Hugo M.", "posicion": 5, "puntos": 35, "foto": null, "avatar": 4 },
+  { "id": 6, "nombre": "Aitana", "posicion": 6, "puntos": 33, "foto": null, "avatar": 5 },
+  { "id": 7, "nombre": "xavier.dev", "posicion": 7, "puntos": 30, "foto": null, "avatar": 6 },
+  { "id": 8, "nombre": "Iván G.", "posicion": 8, "puntos": 27, "foto": null, "avatar": 7 },
+  { "id": 9, "nombre": "Sara P.", "posicion": 9, "puntos": 26, "foto": null, "avatar": 8 },
+  { "id": 10, "nombre": "Dani_804", "posicion": 10, "puntos": 19, "foto": null, "avatar": 9 }
+]

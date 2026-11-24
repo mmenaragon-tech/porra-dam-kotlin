@@ -1,0 +1,12 @@
+{
+  "0": { "fondo": "#FFFFEBEE", "letra": "#FFC62828" },
+  "1": { "fondo": "#FFFFF3E0", "letra": "#FFE65100" },
+  "2": { "fondo": "#FFFFF8E1", "letra": "#FFF57F17" },
+  "3": { "fondo": "#FFE8F5E9", "letra": "#FF2E7D32" },
+  "4": { "fondo": "#FFE0F2F1", "letra": "#FF00695C" },
+  "5": { "fondo": "#FFE1F5FE", "letra": "#FF0277BD" },
+  "6": { "fondo": "#FFE8EAF6", "letra": "#FF283593" },
+  "7": { "fondo": "#FFF3E5F5", "letra": "#FF6A1B9A" },
+  "8": { "fondo": "#FFFCE4EC", "letra": "#FFAD1457" },
+  "9": { "fondo": "#FFEFEBE9", "letra": "#FF4E342E" }
+}

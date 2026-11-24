@@ -20,33 +20,46 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.elCampico.PorraDam.data.Equipo
-import org.elCampico.PorraDam.data.PorraPartido
-import org.elCampico.PorraDam.data.ResultadoPartido
-import org.elCampico.PorraDam.data.porrasPartido
-import org.elCampico.PorraDam.data.resultados
+import androidx.lifecycle.viewmodel.compose.viewModel
+import org.elCampico.PorraDam.data.model.Equipo
+import org.elCampico.PorraDam.data.model.PorraPartido
+import org.elCampico.PorraDam.data.model.ResultadoPartido
+import org.elCampico.PorraDam.model.leerEquipos
+import org.elCampico.PorraDam.model.leerPartidos
+import org.elCampico.PorraDam.model.leerPorras
+import org.elCampico.PorraDam.model.leerPorrasPartido
+import org.elCampico.PorraDam.model.leerResultados
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 
 @Composable
-fun PantallaResultados(modifier: Modifier = Modifier) {
+fun PantallaResultados(
+    modifier: Modifier = Modifier,
+    vm: ResultadosViewModel = viewModel()
+) {
 
-
-
-
-    val totalPuntos = resultados.zip(porrasPartido).sumOf { (resultado, porra) ->
-        calcularPuntos(resultado, porra)
+    val contexto = LocalContext.current
+    LaunchedEffect(Unit) {
+        val equipos = leerEquipos(contexto)
+        val partidos = leerPartidos(contexto, equipos)
+        val resultados = leerResultados(contexto, partidos)
+        val porras = leerPorras(contexto, partidos)
+        vm.cargar(leerPorrasPartido(contexto, resultados, porras))
     }
+
+    val totalPuntos = vm.calcularTotalPuntos(vm.porrasEnviadas)
     var colorPuntos = Color.Black
 
     if (totalPuntos > 0) {
@@ -147,8 +160,8 @@ fun PantallaResultados(modifier: Modifier = Modifier) {
                 .padding(6.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(resultados.zip(porrasPartido)) { (resultado, pronostico) ->
-                ResultadoPartido(resultado, pronostico)
+            items(vm.porrasEnviadas) { porraPartido ->
+                ResultadoPartido(porraPartido)
             }
             item {
                 Row(
@@ -192,10 +205,11 @@ fun PantallaResultados(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ResultadoPartido(resultado: ResultadoPartido, porraPartido: PorraPartido) {
+fun ResultadoPartido(porraPartido: PorraPartido) {
+    val resultado = porraPartido.resultado
     val colorPrincipal: Color
     val colorSecundario: Color
-    val puntos: Int = calcularPuntos(resultado, porraPartido)
+    val puntos: Int = calcularPuntos(porraPartido)
     if (puntos == 8) {
         colorPrincipal = Color.Green
         colorSecundario = Color(0xFFE8F5E9)
@@ -229,7 +243,6 @@ fun ResultadoPartido(resultado: ResultadoPartido, porraPartido: PorraPartido) {
             )
         }
         Box(
-            
             modifier = Modifier
                 .align(Alignment.Top)
                 .padding(start = 20.dp, top = 12.dp)
@@ -237,7 +250,7 @@ fun ResultadoPartido(resultado: ResultadoPartido, porraPartido: PorraPartido) {
                 .padding(horizontal = 12.dp, vertical = 12.dp)
         ) {
             Text(
-                "+${calcularPuntos(resultado, porraPartido)}",
+                "+$puntos",
                 color = colorPrincipal,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
@@ -274,19 +287,19 @@ fun FilaResultado(equipo: Equipo, goles: Int) {
 
 }
 
-fun calcularPuntos(resultado: ResultadoPartido, porraPartido: PorraPartido): Int {
+fun calcularPuntos(porraPartido: PorraPartido): Int {
     // 1 = gana local, 0 = empate, -1 = gana visitante
-    val signoResultado = resultado.golesLocal.compareTo(resultado.golesVisitante)
+    val signoResultado = porraPartido.resultado.golesLocal.compareTo(porraPartido.resultado.golesVisitante)
     val signoPorra = porraPartido.porra.golesLocal.compareTo(porraPartido.porra.golesVisitante)
 
-    return if (resultado.golesLocal == porraPartido.porra.golesLocal &&
-        resultado.golesVisitante == porraPartido.porra.golesVisitante
+    return if (porraPartido.resultado.golesLocal == porraPartido.porra.golesLocal &&
+        porraPartido.resultado.golesVisitante == porraPartido.porra.golesVisitante
     ) {
-        8   // resultado exacto
+        8
     } else if (signoResultado == signoPorra) {
-        4   // acierta quién gana (o el empate), pero no los goles
-    } else if (resultado.golesLocal == porraPartido.porra.golesLocal) {
-        2   // falla el signo, pero acierta los goles del local
+        4
+    } else if (porraPartido.resultado.golesLocal == porraPartido.porra.golesLocal) {
+        2
     } else {
         0
     }

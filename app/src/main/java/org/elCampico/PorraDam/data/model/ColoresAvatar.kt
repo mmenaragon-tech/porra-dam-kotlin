@@ -1,4 +1,4 @@
-package org.elCampico.PorraDam.data
+package org.elCampico.PorraDam.data.model
 
 import androidx.compose.ui.graphics.Color
 
@@ -6,7 +6,7 @@ data class ColoresAvatar(
     val fondo: Color,
     val letra: Color
 )
-
+/*
 val coloresAvatar: Map<Int, ColoresAvatar> = mapOf(
     0 to ColoresAvatar(Color(0xFFFFEBEE), Color(0xFFC62828)), // rojo
     1 to ColoresAvatar(Color(0xFFFFF3E0), Color(0xFFE65100)), // naranja
@@ -19,3 +19,4 @@ val coloresAvatar: Map<Int, ColoresAvatar> = mapOf(
     8 to ColoresAvatar(Color(0xFFFCE4EC), Color(0xFFAD1457)), // rosa
     9 to ColoresAvatar(Color(0xFFEFEBE9), Color(0xFF4E342E))  // marrón
 )
+*/

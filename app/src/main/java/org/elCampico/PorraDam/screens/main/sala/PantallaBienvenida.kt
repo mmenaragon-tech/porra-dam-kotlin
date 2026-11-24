@@ -41,7 +41,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.elCampico.PorraDam.R
+import org.elCampico.PorraDam.data.model.Sala
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 import org.elCampico.PorraDam.ui.utils.FondoPantalla
 
@@ -52,11 +54,10 @@ val Montserrat = FontFamily(
 )
 @Composable
 fun PantallaBienvenida(
-    onEntrar: (alias: String) -> Unit,
-    modifier: Modifier = Modifier
+    onEntrar: (alias: String, sala: Sala) -> Unit,
+    modifier: Modifier = Modifier,
+    vm: BienvenidaViewModel = viewModel()
 ) {
-    var alias by rememberSaveable { mutableStateOf("") }
-    var sala by rememberSaveable { mutableStateOf("") }
     Box(modifier = modifier.fillMaxSize()) {
         FondoPantalla()
         Column(
@@ -107,8 +108,8 @@ fun PantallaBienvenida(
                         modifier = Modifier.padding(5.dp)
                     )
                     OutlinedTextField(
-                        value = alias,
-                        onValueChange = { alias = it },
+                        value = vm.alias,
+                        onValueChange = vm::onAliasChange,
                         label = { Text("Escribe tu nombre o alias")},
                         leadingIcon = {
                             Icon(Icons.Default.Person, contentDescription = null)
@@ -124,8 +125,8 @@ fun PantallaBienvenida(
                         fontWeight = FontWeight.Black
                     )
                     OutlinedTextField(
-                        value = sala,
-                        onValueChange = { sala = it },
+                        value = vm.sala,
+                        onValueChange = vm::onSalaChange,
                         label = { Text("p. ej. 1A - DAM - 2026")},
                         leadingIcon = {
                             Icon(Icons.Default.People, contentDescription = null)
@@ -135,8 +136,8 @@ fun PantallaBienvenida(
                     )
                     Spacer(modifier = modifier.padding(15.dp))
                     Button(
-                        onClick = { onEntrar(alias.trim()) },
-                        enabled = alias.isNotBlank() && sala.isNotBlank(),
+                        onClick = { vm.entrar(onEntrar) },
+                        enabled = vm.puedeEntrar,
                         modifier = modifier.fillMaxWidth().height(60.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Black,
@@ -154,10 +155,4 @@ fun PantallaBienvenida(
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-private fun PantallaSalaPreview() {
-    PorraDamTheme {
-        PantallaBienvenida(onEntrar = { _ ->} )
-    }
-}
+

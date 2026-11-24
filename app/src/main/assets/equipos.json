@@ -1,0 +1,12 @@
+[
+  { "nombre": "Atlético Madrid", "escudo": "atm" },
+  { "nombre": "Real Madrid", "escudo": "rm" },
+  { "nombre": "FC Barcelona", "escudo": "blc" },
+  { "nombre": "Villarreal CF", "escudo": "villa" },
+  { "nombre": "Sevilla FC", "escudo": "sev" },
+  { "nombre": "Real Sociedad", "escudo": "rs" },
+  { "nombre": "Betis", "escudo": "betis" },
+  { "nombre": "Valencia CF", "escudo": "vlc" },
+  { "nombre": "Athletic Club", "escudo": "ath" },
+  { "nombre": "Celta de Vigo", "escudo": "celta" }
+]

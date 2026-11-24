@@ -15,9 +15,8 @@ fun PorraApp(modifier: Modifier = Modifier) {
     val actual = alias
     if(actual == null) {
         PantallaBienvenida(
-            onEntrar = { nombre -> alias = nombre},
+            onEntrar = { nombre, sala -> alias = nombre },
             modifier = modifier
-
         )
     } else {
         PantallaPrincipal(
