@@ -40,7 +40,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.elCampico.PorraDam.data.model.Equipo
 import org.elCampico.PorraDam.data.model.PorraPartido
-import org.elCampico.PorraDam.data.model.ResultadoPartido
 import org.elCampico.PorraDam.data.model.Usuario.Companion.USUARIO_ACTUAL
 import org.elCampico.PorraDam.model.leerEquipos
 import org.elCampico.PorraDam.model.leerPartidos
@@ -48,6 +47,8 @@ import org.elCampico.PorraDam.model.leerPorras
 import org.elCampico.PorraDam.model.leerPorrasPartido
 import org.elCampico.PorraDam.model.leerResultados
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
+import org.elCampico.PorraDam.model.leerJornadas
+import org.elCampico.PorraDam.ui.utils.SelectorJornada
 
 @Composable
 fun PantallaResultados(
@@ -58,15 +59,19 @@ fun PantallaResultados(
     val contexto = LocalContext.current
 
     LaunchedEffect(Unit) {
-        val lista = withContext(Dispatchers.IO) {
+        val (jornadas, porrasPartido) = withContext(Dispatchers.IO) {
             val equipos = leerEquipos(contexto)
-            val partidos = leerPartidos(contexto, equipos)
+            val jornadas = leerJornadas(contexto, equipos)
+            val partidos = leerPartidos(jornadas)
             val resultados = leerResultados(contexto, partidos)
             val porras = leerPorras(contexto)
-            leerPorrasPartido(resultados, porras, USUARIO_ACTUAL)
+            jornadas to leerPorrasPartido(resultados, porras, USUARIO_ACTUAL)
         }
-        vm.cargar(lista)
+        vm.cargar(jornadas, porrasPartido)
     }
+
+    val jornadas by vm.jornadas.collectAsState()
+    val seleccionada by vm.seleccionada.collectAsState()
 
     val porras by vm.porrasEnviadas.collectAsState()
     val totalPuntos by vm.totalPuntos.collectAsState()
@@ -91,14 +96,7 @@ fun PantallaResultados(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Resultados", color = Color.Black, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-            Row(
-                modifier = Modifier
-                    .border(1.dp, Color.LightGray, RoundedCornerShape(8.dp))
-                    .padding(horizontal = 10.dp, vertical = 5.dp)
-            ) {
-                Text("Jornada")
-                Icon(Icons.Default.KeyboardArrowDown, "Flecha")
-            }
+            SelectorJornada(jornadas, seleccionada, onSeleccion = vm::seleccionar)
         }
         Text(
             "Resultados oficiales y puntos obtenidos",

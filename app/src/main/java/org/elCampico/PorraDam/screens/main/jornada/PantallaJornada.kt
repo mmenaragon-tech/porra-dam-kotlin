@@ -21,12 +21,17 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.Usuario.Companion.USUARIO_ACTUAL
 import org.elCampico.PorraDam.model.guardarPorras
 import org.elCampico.PorraDam.model.leerEquipos
@@ -57,9 +63,7 @@ fun PantallaJornada(
 ) {
     val contexto = LocalContext.current
     LaunchedEffect(Unit) {
-        val equipos = leerEquipos(contexto)
-        val partidos = leerPartidos(contexto, equipos)
-        vm.cargar(leerJornadas(contexto, partidos).first())
+        vm.cargar(leerJornadas(contexto, leerEquipos(contexto)))
     }
     // Un valor de goles por partido y equipo
     val golesLocal = remember(vm.partidosEnviados.size) { mutableStateListOf(*Array(vm.partidosEnviados.size) { 0 }) }

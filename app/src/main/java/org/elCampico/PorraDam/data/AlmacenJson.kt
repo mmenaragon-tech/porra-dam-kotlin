@@ -68,30 +68,28 @@ fun leerEquipos(contexto: Context): List<Equipo> {
     }
 }
 
-fun leerPartidos(contexto: Context, equipos: List<Equipo>): List<Partido> {
-    val array = leerArray(contexto, "partidos.json")
+fun leerJornadas(contexto: Context, equipos: List<Equipo>): List<Jornada> {
+    val array = leerArray(contexto, "jornadas.json")
 
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
-        Partido(
-            id = objeto.getInt("id"),
-            local = equipos.first { it.nombre == objeto.getString("local") },
-            visitante = equipos.first { it.nombre == objeto.getString("visitante") }
+        val partidos = objeto.getJSONArray("partidos")
+        Jornada(
+            numero = objeto.getInt("numero"),
+            partidos = List(partidos.length()) { j ->
+                val p = partidos.getJSONObject(j)
+                Partido(
+                    id = p.getInt("id"),
+                    local = equipos.first { it.nombre == p.getString("local") },
+                    visitante = equipos.first { it.nombre == p.getString("visitante") }
+                )
+            }
         )
-    }
+    }.sortedBy { it.numero }
 }
 
-fun leerJornadas(contexto: Context, partidos: List<Partido>): List<Jornada> {
-    val array = leerArray(contexto, "partidos.json")
-
-    return List(array.length()) { i ->
-        val objeto = array.getJSONObject(i)
-        objeto.getInt("jornada") to objeto.getInt("id")
-    }
-        .groupBy({ it.first }, { (_, id) -> partidos.first { it.id == id } })
-        .map { (numero, lista) -> Jornada(numero, lista) }
-        .sortedBy { it.numero }
-}
+fun leerPartidos(jornadas: List<Jornada>): List<Partido> =
+    jornadas.flatMap { it.partidos }
 
 fun leerPorras(contexto: Context): List<Porra> {
     val array = leerArray(contexto, "porras.json")
