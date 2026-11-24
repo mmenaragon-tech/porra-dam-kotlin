@@ -12,11 +12,12 @@ import org.elCampico.PorraDam.data.model.Sala
 import org.elCampico.PorraDam.data.model.Usuario
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
 
 private fun leerArray(contexto: Context, archivo: String): JSONArray {
-    val texto = contexto.assets.open(archivo)
-        .bufferedReader()
-        .use { it.readText() }
+    val propio = File(contexto.filesDir, archivo)
+    val texto = if (propio.exists()) propio.readText()
+    else contexto.assets.open(archivo).bufferedReader().use { it.readText() }
     return JSONArray(texto)
 }
 
@@ -134,4 +135,16 @@ fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
             }
         )
     }
+}
+
+fun guardarPorras(contexto: Context, porras: List<Porra>, partidos: List<Partido>) {
+    val array = JSONArray()
+    porras.forEach { porra ->
+        array.put(JSONObject().apply {
+            put("partido", partidos.indexOf(porra.partido))
+            put("golesLocal", porra.golesLocal)
+            put("golesVisitante", porra.golesVisitante)
+        })
+    }
+    File(contexto.filesDir, "porras.json").writeText(array.toString(2))
 }

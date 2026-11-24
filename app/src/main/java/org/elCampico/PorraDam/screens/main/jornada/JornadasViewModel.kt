@@ -3,6 +3,7 @@ package org.elCampico.PorraDam.screens.main.jornada
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import org.elCampico.PorraDam.data.model.Partido
+import org.elCampico.PorraDam.data.model.Porra
 import org.elCampico.PorraDam.screens.main.resultados.calcularPuntos
 
 class JornadasViewModel : ViewModel() {
@@ -19,4 +20,10 @@ class JornadasViewModel : ViewModel() {
         partidosEnviados.addAll(ListaPartidos)
         cargado=true
     }
+
+    // En el ViewModel
+    fun construirPorras(golesLocal: List<Int>, golesVisitante: List<Int>): List<Porra> =
+        partidosEnviados.mapIndexed { i, partido ->
+            Porra(partido, golesLocal[i], golesVisitante[i])
+        }
 }

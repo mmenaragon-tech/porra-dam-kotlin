@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.elCampico.PorraDam.model.guardarPorras
 import org.elCampico.PorraDam.model.leerEquipos
 import org.elCampico.PorraDam.model.leerPartidos
 import org.elCampico.PorraDam.model.leerPorras
@@ -149,7 +150,10 @@ fun PantallaJornada(
 
             item {
                 Button(
-                    onClick = { /* guardar pronósticos */ },
+                    onClick = {
+                        val porras = vm.construirPorras(golesLocal, golesVisitante)
+                        guardarPorras(contexto, porras, vm.partidosEnviados)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp)
