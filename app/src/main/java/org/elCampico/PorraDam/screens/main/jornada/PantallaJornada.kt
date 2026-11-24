@@ -39,8 +39,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.elCampico.PorraDam.data.model.Usuario.Companion.USUARIO_ACTUAL
 import org.elCampico.PorraDam.model.guardarPorras
 import org.elCampico.PorraDam.model.leerEquipos
+import org.elCampico.PorraDam.model.leerJornadas
 import org.elCampico.PorraDam.model.leerPartidos
 import org.elCampico.PorraDam.model.leerPorras
 import org.elCampico.PorraDam.model.leerPorrasPartido
@@ -57,7 +59,7 @@ fun PantallaJornada(
     LaunchedEffect(Unit) {
         val equipos = leerEquipos(contexto)
         val partidos = leerPartidos(contexto, equipos)
-        vm.cargar(partidos)
+        vm.cargar(leerJornadas(contexto, partidos).first())
     }
     // Un valor de goles por partido y equipo
     val golesLocal = remember(vm.partidosEnviados.size) { mutableStateListOf(*Array(vm.partidosEnviados.size) { 0 }) }
@@ -66,7 +68,7 @@ fun PantallaJornada(
     // Solo el contenedor raíz usa "modifier" (trae el padding del Scaffold)
     Column(modifier = modifier.fillMaxSize()) {
         Text(
-            "Jornada 1",
+            "Jornada ${vm.numeroJornada}",
             modifier = Modifier.padding(horizontal = 18.dp),
             color = Color.White,
             fontSize = 30.sp,
@@ -115,12 +117,12 @@ fun PantallaJornada(
             }
 
             */
-            itemsIndexed(vm.partidosEnviados) { i, (equipo1, equipo2) ->
+            itemsIndexed(vm.partidosEnviados) { i, partido ->
                 PartidoItem(
-                    escudoLocal = equipo1.escudo,
-                    escudoVisitante = equipo2.escudo,
-                    local = equipo1.nombre,
-                    visitante = equipo2.nombre,
+                    escudoLocal = partido.local.escudo,
+                    escudoVisitante = partido.visitante.escudo,
+                    local = partido.local.nombre,
+                    visitante = partido.visitante.nombre,
                     golesLocal = golesLocal[i],
                     golesVisitante = golesVisitante[i],
                     onGolesLocalChange = { golesLocal[i] = it },
@@ -151,8 +153,8 @@ fun PantallaJornada(
             item {
                 Button(
                     onClick = {
-                        val porras = vm.construirPorras(golesLocal, golesVisitante)
-                        guardarPorras(contexto, porras, vm.partidosEnviados)
+                        val porras = vm.construirPorras(USUARIO_ACTUAL, golesLocal, golesVisitante)
+                        guardarPorras(contexto, porras)
                     },
                     modifier = Modifier
                         .fillMaxWidth()

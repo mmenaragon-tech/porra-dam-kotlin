@@ -1,29 +1,34 @@
 package org.elCampico.PorraDam.screens.main.jornada
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.Partido
 import org.elCampico.PorraDam.data.model.Porra
 import org.elCampico.PorraDam.screens.main.resultados.calcularPuntos
 
 class JornadasViewModel : ViewModel() {
-
     val partidosEnviados = mutableStateListOf<Partido>()
+    var numeroJornada by mutableIntStateOf(0)
+        private set
 
-    init {
-        partidosEnviados
+    private var cargado = false
+    fun cargar(jornada: Jornada) {
+        if (cargado) return     // Ya se cargó
+        numeroJornada = jornada.numero
+        partidosEnviados.addAll(jornada.partidos)
+        cargado = true
     }
 
-    private var cargado=false
-    fun cargar(ListaPartidos: List<Partido>){
-        if (cargado) return     //Ya se cargó
-        partidosEnviados.addAll(ListaPartidos)
-        cargado=true
-    }
-
-    // En el ViewModel
-    fun construirPorras(golesLocal: List<Int>, golesVisitante: List<Int>): List<Porra> =
+    fun construirPorras(
+        usuarioId: Int,
+        golesLocal: List<Int>,
+        golesVisitante: List<Int>
+    ): List<Porra> =
         partidosEnviados.mapIndexed { i, partido ->
-            Porra(partido, golesLocal[i], golesVisitante[i])
+            Porra(usuarioId, partido.id, golesLocal[i], golesVisitante[i])
         }
 }

@@ -21,6 +21,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,9 +36,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.elCampico.PorraDam.data.model.Equipo
 import org.elCampico.PorraDam.data.model.PorraPartido
 import org.elCampico.PorraDam.data.model.ResultadoPartido
+import org.elCampico.PorraDam.data.model.Usuario.Companion.USUARIO_ACTUAL
 import org.elCampico.PorraDam.model.leerEquipos
 import org.elCampico.PorraDam.model.leerPartidos
 import org.elCampico.PorraDam.model.leerPorras
@@ -51,21 +56,25 @@ fun PantallaResultados(
 ) {
 
     val contexto = LocalContext.current
+
     LaunchedEffect(Unit) {
-        val equipos = leerEquipos(contexto)
-        val partidos = leerPartidos(contexto, equipos)
-        val resultados = leerResultados(contexto, partidos)
-        val porras = leerPorras(contexto, partidos)
-        vm.cargar(leerPorrasPartido(contexto, resultados, porras))
+        val lista = withContext(Dispatchers.IO) {
+            val equipos = leerEquipos(contexto)
+            val partidos = leerPartidos(contexto, equipos)
+            val resultados = leerResultados(contexto, partidos)
+            val porras = leerPorras(contexto)
+            leerPorrasPartido(resultados, porras, USUARIO_ACTUAL)
+        }
+        vm.cargar(lista)
     }
 
-    val totalPuntos = vm.calcularTotalPuntos(vm.porrasEnviadas)
-    var colorPuntos = Color.Black
+    val porras by vm.porrasEnviadas.collectAsState()
+    val totalPuntos by vm.totalPuntos.collectAsState()
 
-    if (totalPuntos > 0) {
-        colorPuntos = Color.Green
-    } else if (totalPuntos < 0) {
-        colorPuntos = Color.Red
+    val colorPuntos = when {
+        totalPuntos > 0 -> Color.Green
+        totalPuntos < 0 -> Color.Red
+        else -> Color.Black
     }
 
     Column(
@@ -96,62 +105,7 @@ fun PantallaResultados(
             modifier = Modifier.padding(horizontal = 18.dp, vertical = 8.dp),
             color = Color.Black
         )
-        /*
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .background(Color.White)
-                .verticalScroll(rememberScrollState())
-                .padding(6.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            resultados.zip(porras).forEach { (resultado, pronostico) ->
-                ResultadoPartido(resultado, pronostico)
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp, vertical = 5.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(15.dp))
-                        .fillMaxWidth()
-                        .background(color = Color(0xFFEEEEEE))
-                        .padding(12.dp)
 
-                ) {
-                    Icon(
-                        Icons.Default.Star, "Estrella",
-                        tint = Color.Yellow,
-                        modifier = Modifier.size(38.dp)
-                    )
-                    Text(
-                        "Total jornada",
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp)
-                            .weight(1f)
-                    )
-                    Text(
-                        "+$totalPuntos",
-                        textAlign = TextAlign.End,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(15.dp))
-                            .background(color = Color.White)
-                            .padding(12.dp),
-                        color = colorPuntos,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Black
-                    )
-                }
-            }
-        }
-
-        */
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -160,7 +114,7 @@ fun PantallaResultados(
                 .padding(6.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(vm.porrasEnviadas) { porraPartido ->
+            items(porras) { porraPartido ->
                 ResultadoPartido(porraPartido)
             }
             item {

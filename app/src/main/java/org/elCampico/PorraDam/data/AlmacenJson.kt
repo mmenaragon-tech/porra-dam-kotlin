@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.ui.graphics.Color
 import org.elCampico.PorraDam.data.model.ColoresAvatar
 import org.elCampico.PorraDam.data.model.Equipo
+import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.Partido
 import org.elCampico.PorraDam.data.model.Porra
 import org.elCampico.PorraDam.data.model.PorraPartido
@@ -73,19 +74,33 @@ fun leerPartidos(contexto: Context, equipos: List<Equipo>): List<Partido> {
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
         Partido(
+            id = objeto.getInt("id"),
             local = equipos.first { it.nombre == objeto.getString("local") },
             visitante = equipos.first { it.nombre == objeto.getString("visitante") }
         )
     }
 }
 
-fun leerPorras(contexto: Context, partidos: List<Partido>): List<Porra> {
+fun leerJornadas(contexto: Context, partidos: List<Partido>): List<Jornada> {
+    val array = leerArray(contexto, "partidos.json")
+
+    return List(array.length()) { i ->
+        val objeto = array.getJSONObject(i)
+        objeto.getInt("jornada") to objeto.getInt("id")
+    }
+        .groupBy({ it.first }, { (_, id) -> partidos.first { it.id == id } })
+        .map { (numero, lista) -> Jornada(numero, lista) }
+        .sortedBy { it.numero }
+}
+
+fun leerPorras(contexto: Context): List<Porra> {
     val array = leerArray(contexto, "porras.json")
 
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
         Porra(
-            partido = partidos[objeto.getInt("partido")],
+            usuarioId = objeto.getInt("usuario"),
+            partidoId = objeto.getInt("partido"),
             golesLocal = objeto.getInt("golesLocal"),
             golesVisitante = objeto.getInt("golesVisitante")
         )
@@ -98,7 +113,7 @@ fun leerResultados(contexto: Context, partidos: List<Partido>): List<ResultadoPa
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
         ResultadoPartido(
-            partido = partidos[objeto.getInt("partido")],
+            partido = partidos.first { it.id == objeto.getInt("partido") },
             golesLocal = objeto.getInt("golesLocal"),
             golesVisitante = objeto.getInt("golesVisitante")
         )
@@ -106,20 +121,15 @@ fun leerResultados(contexto: Context, partidos: List<Partido>): List<ResultadoPa
 }
 
 fun leerPorrasPartido(
-    contexto: Context,
     resultados: List<ResultadoPartido>,
-    porras: List<Porra>
-): List<PorraPartido> {
-    val array = leerArray(contexto, "porrasPartido.json")
-
-    return List(array.length()) { i ->
-        val objeto = array.getJSONObject(i)
-        PorraPartido(
-            resultado = resultados[objeto.getInt("resultado")],
-            porra = porras[objeto.getInt("porra")]
-        )
+    porras: List<Porra>,
+    usuarioId: Int
+): List<PorraPartido> =
+    resultados.mapNotNull { resultado ->
+        porras.firstOrNull {
+            it.usuarioId == usuarioId && it.partidoId == resultado.partido.id
+        }?.let { PorraPartido(resultado, it) }
     }
-}
 
 fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
     val array = leerArray(contexto, "salas.json")
@@ -137,11 +147,16 @@ fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
     }
 }
 
-fun guardarPorras(contexto: Context, porras: List<Porra>, partidos: List<Partido>) {
+fun guardarPorras(contexto: Context, nuevas: List<Porra>) {
+    val claves = nuevas.map { it.usuarioId to it.partidoId }.toSet()
+    val todas = leerPorras(contexto)
+        .filterNot { (it.usuarioId to it.partidoId) in claves } + nuevas
+
     val array = JSONArray()
-    porras.forEach { porra ->
+    todas.forEach { porra ->
         array.put(JSONObject().apply {
-            put("partido", partidos.indexOf(porra.partido))
+            put("usuario", porra.usuarioId)
+            put("partido", porra.partidoId)
             put("golesLocal", porra.golesLocal)
             put("golesVisitante", porra.golesVisitante)
         })

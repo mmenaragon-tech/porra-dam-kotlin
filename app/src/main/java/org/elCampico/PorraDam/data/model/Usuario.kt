@@ -9,5 +9,11 @@ data class Usuario(
     val puntos: Int,
     @DrawableRes val foto: Int? = null,
     val avatar: ColoresAvatar
-)
+){
+    companion object {
+        const val USUARIO_ACTUAL = 4
+    }
+}
+
+
 

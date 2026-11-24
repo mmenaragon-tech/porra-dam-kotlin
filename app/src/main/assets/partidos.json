@@ -1,7 +1,7 @@
 [
-  { "local": "Atlético Madrid", "visitante": "Real Madrid" },
-  { "local": "FC Barcelona", "visitante": "Villarreal CF" },
-  { "local": "Sevilla FC", "visitante": "Real Sociedad" },
-  { "local": "Betis", "visitante": "Valencia CF" },
-  { "local": "Athletic Club", "visitante": "Celta de Vigo" }
+  { "id": 0, "jornada": 1, "local": "Atlético Madrid", "visitante": "Real Madrid" },
+  { "id": 1, "jornada": 1, "local": "FC Barcelona", "visitante": "Villarreal CF" },
+  { "id": 2, "jornada": 1, "local": "Sevilla FC", "visitante": "Real Sociedad" },
+  { "id": 3, "jornada": 1, "local": "Betis", "visitante": "Valencia CF" },
+  { "id": 4, "jornada": 1, "local": "Athletic Club", "visitante": "Celta de Vigo" }
 ]

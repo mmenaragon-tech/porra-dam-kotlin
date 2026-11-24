@@ -1,7 +1,7 @@
 [
-  { "partido": 0, "golesLocal": 2, "golesVisitante": 1 },
-  { "partido": 1, "golesLocal": 2, "golesVisitante": 0 },
-  { "partido": 2, "golesLocal": 1, "golesVisitante": 0 },
-  { "partido": 3, "golesLocal": 1, "golesVisitante": 1 },
-  { "partido": 4, "golesLocal": 1, "golesVisitante": 0 }
+  { "usuario": 4, "partido": 0, "golesLocal": 2, "golesVisitante": 1 },
+  { "usuario": 4, "partido": 1, "golesLocal": 2, "golesVisitante": 0 },
+  { "usuario": 4, "partido": 2, "golesLocal": 1, "golesVisitante": 0 },
+  { "usuario": 4, "partido": 3, "golesLocal": 1, "golesVisitante": 1 },
+  { "usuario": 4, "partido": 4, "golesLocal": 1, "golesVisitante": 0 }
 ]
