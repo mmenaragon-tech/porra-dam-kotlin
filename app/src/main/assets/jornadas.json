@@ -1,183 +1,185 @@
 
-[
-  {
-    "numero": 1,
-    "partidos": [
-      { "id": 0, "local": "Atlético Madrid", "visitante": "Real Madrid" },
-      { "id": 1, "local": "FC Barcelona", "visitante": "Villarreal CF" },
-      { "id": 2, "local": "Sevilla FC", "visitante": "Real Sociedad" },
-      { "id": 3, "local": "Betis", "visitante": "Valencia CF" },
-      { "id": 4, "local": "Athletic Club", "visitante": "Celta de Vigo" }
-    ]
-  },
-  {
-    "numero": 2,
-    "partidos": [
-      { "id": 5, "local": "Real Madrid", "visitante": "Sevilla FC" },
-      { "id": 6, "local": "Atlético Madrid", "visitante": "Villarreal CF" },
-      { "id": 7, "local": "Real Sociedad", "visitante": "Betis" },
-      { "id": 8, "local": "Valencia CF", "visitante": "Athletic Club" },
-      { "id": 9, "local": "Celta de Vigo", "visitante": "FC Barcelona" }
-    ]
-  },
-  {
-    "numero": 3,
-    "partidos": [
-      { "id": 10, "local": "Atlético Madrid", "visitante": "Sevilla FC" },
-      { "id": 11, "local": "Villarreal CF", "visitante": "Real Sociedad" },
-      { "id": 12, "local": "Real Madrid", "visitante": "Betis" },
-      { "id": 13, "local": "Athletic Club", "visitante": "FC Barcelona" },
-      { "id": 14, "local": "Valencia CF", "visitante": "Celta de Vigo" }
-    ]
-  },
-  {
-    "numero": 4,
-    "partidos": [
-      { "id": 15, "local": "Atlético Madrid", "visitante": "Real Sociedad" },
-      { "id": 16, "local": "Sevilla FC", "visitante": "Betis" },
-      { "id": 17, "local": "Villarreal CF", "visitante": "Valencia CF" },
-      { "id": 18, "local": "Real Madrid", "visitante": "Athletic Club" },
-      { "id": 19, "local": "Celta de Vigo", "visitante": "FC Barcelona" }
-    ]
-  },
-  {
-    "numero": 5,
-    "partidos": [
-      { "id": 20, "local": "Atlético Madrid", "visitante": "Betis" },
-      { "id": 21, "local": "Real Sociedad", "visitante": "Valencia CF" },
-      { "id": 22, "local": "Sevilla FC", "visitante": "Athletic Club" },
-      { "id": 23, "local": "Villarreal CF", "visitante": "Celta de Vigo" },
-      { "id": 24, "local": "FC Barcelona", "visitante": "Real Madrid" }
-    ]
-  },
-  {
-    "numero": 6,
-    "partidos": [
-      { "id": 25, "local": "Atlético Madrid", "visitante": "Valencia CF" },
-      { "id": 26, "local": "Betis", "visitante": "Athletic Club" },
-      { "id": 27, "local": "Real Sociedad", "visitante": "Celta de Vigo" },
-      { "id": 28, "local": "Sevilla FC", "visitante": "FC Barcelona" },
-      { "id": 29, "local": "Villarreal CF", "visitante": "Real Madrid" }
-    ]
-  },
-  {
-    "numero": 7,
-    "partidos": [
-      { "id": 30, "local": "Atlético Madrid", "visitante": "Athletic Club" },
-      { "id": 31, "local": "Valencia CF", "visitante": "Celta de Vigo" },
-      { "id": 32, "local": "Betis", "visitante": "FC Barcelona" },
-      { "id": 33, "local": "Real Sociedad", "visitante": "Real Madrid" },
-      { "id": 34, "local": "Sevilla FC", "visitante": "Villarreal CF" }
-    ]
-  },
-  {
-    "numero": 8,
-    "partidos": [
-      { "id": 35, "local": "Atlético Madrid", "visitante": "Celta de Vigo" },
-      { "id": 36, "local": "Athletic Club", "visitante": "FC Barcelona" },
-      { "id": 37, "local": "Valencia CF", "visitante": "Real Madrid" },
-      { "id": 38, "local": "Betis", "visitante": "Villarreal CF" },
-      { "id": 39, "local": "Real Sociedad", "visitante": "Sevilla FC" }
-    ]
-  },
-  {
-    "numero": 9,
-    "partidos": [
-      { "id": 40, "local": "Atlético Madrid", "visitante": "FC Barcelona" },
-      { "id": 41, "local": "Celta de Vigo", "visitante": "Real Madrid" },
-      { "id": 42, "local": "Athletic Club", "visitante": "Villarreal CF" },
-      { "id": 43, "local": "Valencia CF", "visitante": "Sevilla FC" },
-      { "id": 44, "local": "Betis", "visitante": "Real Sociedad" }
-    ]
-  },
-  {
-    "numero": 10,
-    "partidos": [
-      { "id": 45, "local": "Real Madrid", "visitante": "Atlético Madrid" },
-      { "id": 46, "local": "Villarreal CF", "visitante": "FC Barcelona" },
-      { "id": 47, "local": "Real Sociedad", "visitante": "Sevilla FC" },
-      { "id": 48, "local": "Valencia CF", "visitante": "Betis" },
-      { "id": 49, "local": "Celta de Vigo", "visitante": "Athletic Club" }
-    ]
-  },
-  {
-    "numero": 11,
-    "partidos": [
-      { "id": 50, "local": "Sevilla FC", "visitante": "Real Madrid" },
-      { "id": 51, "local": "Villarreal CF", "visitante": "Atlético Madrid" },
-      { "id": 52, "local": "Betis", "visitante": "Real Sociedad" },
-      { "id": 53, "local": "Athletic Club", "visitante": "Valencia CF" },
-      { "id": 54, "local": "FC Barcelona", "visitante": "Celta de Vigo" }
-    ]
-  },
-  {
-    "numero": 12,
-    "partidos": [
-      { "id": 55, "local": "Sevilla FC", "visitante": "Atlético Madrid" },
-      { "id": 56, "local": "Real Sociedad", "visitante": "Villarreal CF" },
-      { "id": 57, "local": "Betis", "visitante": "Real Madrid" },
-      { "id": 58, "local": "FC Barcelona", "visitante": "Athletic Club" },
-      { "id": 59, "local": "Celta de Vigo", "visitante": "Valencia CF" }
-    ]
-  },
-  {
-    "numero": 13,
-    "partidos": [
-      { "id": 60, "local": "Real Sociedad", "visitante": "Atlético Madrid" },
-      { "id": 61, "local": "Betis", "visitante": "Sevilla FC" },
-      { "id": 62, "local": "Valencia CF", "visitante": "Villarreal CF" },
-      { "id": 63, "local": "Athletic Club", "visitante": "Real Madrid" },
-      { "id": 64, "local": "FC Barcelona", "visitante": "Celta de Vigo" }
-    ]
-  },
-  {
-    "numero": 14,
-    "partidos": [
-      { "id": 65, "local": "Betis", "visitante": "Atlético Madrid" },
-      { "id": 66, "local": "Valencia CF", "visitante": "Real Sociedad" },
-      { "id": 67, "local": "Athletic Club", "visitante": "Sevilla FC" },
-      { "id": 68, "local": "Celta de Vigo", "visitante": "Villarreal CF" },
-      { "id": 69, "local": "Real Madrid", "visitante": "FC Barcelona" }
-    ]
-  },
-  {
-    "numero": 15,
-    "partidos": [
-      { "id": 70, "local": "Valencia CF", "visitante": "Atlético Madrid" },
-      { "id": 71, "local": "Athletic Club", "visitante": "Betis" },
-      { "id": 72, "local": "Celta de Vigo", "visitante": "Real Sociedad" },
-      { "id": 73, "local": "FC Barcelona", "visitante": "Sevilla FC" },
-      { "id": 74, "local": "Real Madrid", "visitante": "Villarreal CF" }
-    ]
-  },
-  {
-    "numero": 16,
-    "partidos": [
-      { "id": 75, "local": "Athletic Club", "visitante": "Atlético Madrid" },
-      { "id": 76, "local": "Celta de Vigo", "visitante": "Valencia CF" },
-      { "id": 77, "local": "FC Barcelona", "visitante": "Betis" },
-      { "id": 78, "local": "Real Madrid", "visitante": "Real Sociedad" },
-      { "id": 79, "local": "Villarreal CF", "visitante": "Sevilla FC" }
-    ]
-  },
-  {
-    "numero": 17,
-    "partidos": [
-      { "id": 80, "local": "Celta de Vigo", "visitante": "Atlético Madrid" },
-      { "id": 81, "local": "FC Barcelona", "visitante": "Athletic Club" },
-      { "id": 82, "local": "Real Madrid", "visitante": "Valencia CF" },
-      { "id": 83, "local": "Villarreal CF", "visitante": "Betis" },
-      { "id": 84, "local": "Sevilla FC", "visitante": "Real Sociedad" }
-    ]
-  },
-  {
-    "numero": 18,
-    "partidos": [
-      { "id": 85, "local": "FC Barcelona", "visitante": "Atlético Madrid" },
-      { "id": 86, "local": "Real Madrid", "visitante": "Celta de Vigo" },
-      { "id": 87, "local": "Villarreal CF", "visitante": "Athletic Club" },
-      { "id": 88, "local": "Sevilla FC", "visitante": "Valencia CF" },
-      { "id": 89, "local": "Real Sociedad", "visitante": "Betis" }
-    ]
-  }
-]
+{
+  "jornadas": [
+    {
+      "numero": 1,
+      "partidos": [
+        {"id": 0, "local": "Atlético Madrid", "visitante": "Real Madrid", "golesLocal": 2, "golesVisitante": 1, "fecha": "2026-08-15", "hora": "21:00"},
+        {"id": 1, "local": "FC Barcelona", "visitante": "Villarreal CF", "golesLocal": 3, "golesVisitante": 0, "fecha": "2026-08-16", "hora": "19:00"},
+        {"id": 2, "local": "Sevilla FC", "visitante": "Real Sociedad", "golesLocal": 1, "golesVisitante": 1, "fecha": "2026-08-16", "hora": "17:00"},
+        {"id": 3, "local": "Betis", "visitante": "Valencia CF", "golesLocal": 2, "golesVisitante": 2, "fecha": "2026-08-17", "hora": "21:00"},
+        {"id": 4, "local": "Athletic Club", "visitante": "Celta de Vigo", "golesLocal": 1, "golesVisitante": 0, "fecha": "2026-08-17", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 2,
+      "partidos": [
+        {"id": 5, "local": "Real Madrid", "visitante": "FC Barcelona", "golesLocal": 2, "golesVisitante": 2, "fecha": "2026-08-22", "hora": "21:00"},
+        {"id": 6, "local": "Villarreal CF", "visitante": "Sevilla FC", "golesLocal": 1, "golesVisitante": 0, "fecha": "2026-08-23", "hora": "19:00"},
+        {"id": 7, "local": "Real Sociedad", "visitante": "Betis", "golesLocal": 0, "golesVisitante": 1, "fecha": "2026-08-23", "hora": "17:00"},
+        {"id": 8, "local": "Valencia CF", "visitante": "Athletic Club", "golesLocal": 2, "golesVisitante": 1, "fecha": "2026-08-24", "hora": "21:00"},
+        {"id": 9, "local": "Celta de Vigo", "visitante": "Atlético Madrid", "golesLocal": 1, "golesVisitante": 3, "fecha": "2026-08-24", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 3,
+      "partidos": [
+        {"id": 10, "local": "Atlético Madrid", "visitante": "FC Barcelona", "golesLocal": 1, "golesVisitante": 2, "fecha": "2026-08-29", "hora": "21:00"},
+        {"id": 11, "local": "Sevilla FC", "visitante": "Real Madrid", "golesLocal": 0, "golesVisitante": 2, "fecha": "2026-08-30", "hora": "19:00"},
+        {"id": 12, "local": "Betis", "visitante": "Villarreal CF", "golesLocal": 2, "golesVisitante": 1, "fecha": "2026-08-30", "hora": "17:00"},
+        {"id": 13, "local": "Athletic Club", "visitante": "Real Sociedad", "golesLocal": 1, "golesVisitante": 1, "fecha": "2026-08-31", "hora": "21:00"},
+        {"id": 14, "local": "Valencia CF", "visitante": "Celta de Vigo", "golesLocal": 0, "golesVisitante": 0, "fecha": "2026-08-31", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 4,
+      "partidos": [
+        {"id": 15, "local": "Real Madrid", "visitante": "Betis", "golesLocal": 3, "golesVisitante": 1, "fecha": "2026-09-05", "hora": "21:00"},
+        {"id": 16, "local": "FC Barcelona", "visitante": "Sevilla FC", "golesLocal": 2, "golesVisitante": 0, "fecha": "2026-09-06", "hora": "19:00"},
+        {"id": 17, "local": "Villarreal CF", "visitante": "Athletic Club", "golesLocal": 1, "golesVisitante": 1, "fecha": "2026-09-06", "hora": "17:00"},
+        {"id": 18, "local": "Real Sociedad", "visitante": "Valencia CF", "golesLocal": 2, "golesVisitante": 0, "fecha": "2026-09-07", "hora": "21:00"},
+        {"id": 19, "local": "Celta de Vigo", "visitante": "Atlético Madrid", "golesLocal": 0, "golesVisitante": 2, "fecha": "2026-09-07", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 5,
+      "partidos": [
+        {"id": 20, "local": "Atlético Madrid", "visitante": "Sevilla FC", "golesLocal": 2, "golesVisitante": 0, "fecha": "2026-09-12", "hora": "21:00"},
+        {"id": 21, "local": "Betis", "visitante": "FC Barcelona", "golesLocal": 1, "golesVisitante": 3, "fecha": "2026-09-13", "hora": "19:00"},
+        {"id": 22, "local": "Athletic Club", "visitante": "Real Madrid", "golesLocal": 0, "golesVisitante": 2, "fecha": "2026-09-13", "hora": "17:00"},
+        {"id": 23, "local": "Valencia CF", "visitante": "Villarreal CF", "golesLocal": 1, "golesVisitante": 1, "fecha": "2026-09-14", "hora": "21:00"},
+        {"id": 24, "local": "Real Sociedad", "visitante": "Celta de Vigo", "golesLocal": 2, "golesVisitante": 1, "fecha": "2026-09-14", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 6,
+      "partidos": [
+        {"id": 25, "local": "Real Madrid", "visitante": "Valencia CF", "golesLocal": 2, "golesVisitante": 0, "fecha": "2026-09-19", "hora": "21:00"},
+        {"id": 26, "local": "FC Barcelona", "visitante": "Athletic Club", "golesLocal": 3, "golesVisitante": 1, "fecha": "2026-09-20", "hora": "19:00"},
+        {"id": 27, "local": "Villarreal CF", "visitante": "Real Sociedad", "golesLocal": 2, "golesVisitante": 2, "fecha": "2026-09-20", "hora": "17:00"},
+        {"id": 28, "local": "Sevilla FC", "visitante": "Betis", "golesLocal": 1, "golesVisitante": 0, "fecha": "2026-09-21", "hora": "21:00"},
+        {"id": 29, "local": "Celta de Vigo", "visitante": "Atlético Madrid", "golesLocal": 1, "golesVisitante": 2, "fecha": "2026-09-21", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 7,
+      "partidos": [
+        {"id": 30, "local": "Atlético Madrid", "visitante": "Betis", "golesLocal": 2, "golesVisitante": 1, "fecha": "2026-09-26", "hora": "21:00"},
+        {"id": 31, "local": "Athletic Club", "visitante": "Sevilla FC", "golesLocal": 1, "golesVisitante": 0, "fecha": "2026-09-27", "hora": "19:00"},
+        {"id": 32, "local": "Valencia CF", "visitante": "FC Barcelona", "golesLocal": 0, "golesVisitante": 2, "fecha": "2026-09-27", "hora": "17:00"},
+        {"id": 33, "local": "Real Sociedad", "visitante": "Real Madrid", "golesLocal": 1, "golesVisitante": 3, "fecha": "2026-09-28", "hora": "21:00"},
+        {"id": 34, "local": "Villarreal CF", "visitante": "Celta de Vigo", "golesLocal": 2, "golesVisitante": 0, "fecha": "2026-09-28", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 8,
+      "partidos": [
+        {"id": 35, "local": "Real Madrid", "visitante": "Villarreal CF", "fecha": "2026-10-03", "hora": "21:00"},
+        {"id": 36, "local": "FC Barcelona", "visitante": "Real Sociedad", "fecha": "2026-10-04", "hora": "19:00"},
+        {"id": 37, "local": "Sevilla FC", "visitante": "Valencia CF", "fecha": "2026-10-04", "hora": "17:00"},
+        {"id": 38, "local": "Betis", "visitante": "Athletic Club", "fecha": "2026-10-05", "hora": "21:00"},
+        {"id": 39, "local": "Celta de Vigo", "visitante": "Atlético Madrid", "fecha": "2026-10-05", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 9,
+      "partidos": [
+        {"id": 40, "local": "Atlético Madrid", "visitante": "Villarreal CF", "fecha": "2026-10-10", "hora": "21:00"},
+        {"id": 41, "local": "Real Sociedad", "visitante": "Sevilla FC", "fecha": "2026-10-11", "hora": "19:00"},
+        {"id": 42, "local": "Valencia CF", "visitante": "Real Madrid", "fecha": "2026-10-11", "hora": "17:00"},
+        {"id": 43, "local": "Athletic Club", "visitante": "FC Barcelona", "fecha": "2026-10-12", "hora": "21:00"},
+        {"id": 44, "local": "Betis", "visitante": "Celta de Vigo", "fecha": "2026-10-12", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 10,
+      "partidos": [
+        {"id": 45, "local": "Real Madrid", "visitante": "Atlético Madrid", "fecha": "2026-10-17", "hora": "21:00"},
+        {"id": 46, "local": "FC Barcelona", "visitante": "Betis", "fecha": "2026-10-18", "hora": "19:00"},
+        {"id": 47, "local": "Villarreal CF", "visitante": "Valencia CF", "fecha": "2026-10-18", "hora": "17:00"},
+        {"id": 48, "local": "Sevilla FC", "visitante": "Athletic Club", "fecha": "2026-10-19", "hora": "21:00"},
+        {"id": 49, "local": "Celta de Vigo", "visitante": "Real Sociedad", "fecha": "2026-10-19", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 11,
+      "partidos": [
+        {"id": 50, "local": "Atlético Madrid", "visitante": "Real Sociedad", "fecha": "2026-10-24", "hora": "21:00"},
+        {"id": 51, "local": "Betis", "visitante": "Real Madrid", "fecha": "2026-10-25", "hora": "19:00"},
+        {"id": 52, "local": "Athletic Club", "visitante": "Villarreal CF", "fecha": "2026-10-25", "hora": "17:00"},
+        {"id": 53, "local": "Valencia CF", "visitante": "Sevilla FC", "fecha": "2026-10-26", "hora": "21:00"},
+        {"id": 54, "local": "FC Barcelona", "visitante": "Celta de Vigo", "fecha": "2026-10-26", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 12,
+      "partidos": [
+        {"id": 55, "local": "Real Madrid", "visitante": "Sevilla FC", "fecha": "2026-10-31", "hora": "21:00"},
+        {"id": 56, "local": "FC Barcelona", "visitante": "Atlético Madrid", "fecha": "2026-11-01", "hora": "19:00"},
+        {"id": 57, "local": "Villarreal CF", "visitante": "Betis", "fecha": "2026-11-01", "hora": "17:00"},
+        {"id": 58, "local": "Real Sociedad", "visitante": "Athletic Club", "fecha": "2026-11-02", "hora": "21:00"},
+        {"id": 59, "local": "Celta de Vigo", "visitante": "Valencia CF", "fecha": "2026-11-02", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 13,
+      "partidos": [
+        {"id": 60, "local": "Atlético Madrid", "visitante": "Valencia CF", "fecha": "2026-11-07", "hora": "21:00"},
+        {"id": 61, "local": "Sevilla FC", "visitante": "FC Barcelona", "fecha": "2026-11-08", "hora": "19:00"},
+        {"id": 62, "local": "Betis", "visitante": "Real Sociedad", "fecha": "2026-11-08", "hora": "17:00"},
+        {"id": 63, "local": "Athletic Club", "visitante": "Real Madrid", "fecha": "2026-11-09", "hora": "21:00"},
+        {"id": 64, "local": "Villarreal CF", "visitante": "Celta de Vigo", "fecha": "2026-11-09", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 14,
+      "partidos": [
+        {"id": 65, "local": "Real Madrid", "visitante": "Athletic Club", "fecha": "2026-11-14", "hora": "21:00"},
+        {"id": 66, "local": "FC Barcelona", "visitante": "Valencia CF", "fecha": "2026-11-15", "hora": "19:00"},
+        {"id": 67, "local": "Villarreal CF", "visitante": "Atlético Madrid", "fecha": "2026-11-15", "hora": "17:00"},
+        {"id": 68, "local": "Sevilla FC", "visitante": "Celta de Vigo", "fecha": "2026-11-16", "hora": "21:00"},
+        {"id": 69, "local": "Real Sociedad", "visitante": "Betis", "fecha": "2026-11-16", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 15,
+      "partidos": [
+        {"id": 70, "local": "Atlético Madrid", "visitante": "Athletic Club", "fecha": "2026-11-21", "hora": "21:00"},
+        {"id": 71, "local": "Real Madrid", "visitante": "Celta de Vigo", "fecha": "2026-11-22", "hora": "19:00"},
+        {"id": 72, "local": "FC Barcelona", "visitante": "Real Sociedad", "fecha": "2026-11-22", "hora": "17:00"},
+        {"id": 73, "local": "Villarreal CF", "visitante": "Sevilla FC", "fecha": "2026-11-23", "hora": "21:00"},
+        {"id": 74, "local": "Betis", "visitante": "Valencia CF", "fecha": "2026-11-23", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 16,
+      "partidos": [
+        {"id": 75, "local": "Atlético Madrid", "visitante": "Real Madrid", "fecha": "2026-12-05", "hora": "21:00"},
+        {"id": 76, "local": "Sevilla FC", "visitante": "Real Sociedad", "fecha": "2026-12-06", "hora": "19:00"},
+        {"id": 77, "local": "Betis", "visitante": "FC Barcelona", "fecha": "2026-12-06", "hora": "17:00"},
+        {"id": 78, "local": "Valencia CF", "visitante": "Villarreal CF", "fecha": "2026-12-07", "hora": "21:00"},
+        {"id": 79, "local": "Athletic Club", "visitante": "Celta de Vigo", "fecha": "2026-12-07", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 17,
+      "partidos": [
+        {"id": 80, "local": "Real Madrid", "visitante": "FC Barcelona", "fecha": "2026-12-12", "hora": "21:00"},
+        {"id": 81, "local": "Villarreal CF", "visitante": "Sevilla FC", "fecha": "2026-12-13", "hora": "19:00"},
+        {"id": 82, "local": "Real Sociedad", "visitante": "Betis", "fecha": "2026-12-13", "hora": "17:00"},
+        {"id": 83, "local": "Valencia CF", "visitante": "Athletic Club", "fecha": "2026-12-14", "hora": "21:00"},
+        {"id": 84, "local": "Celta de Vigo", "visitante": "Atlético Madrid", "fecha": "2026-12-14", "hora": "19:00"}
+      ]
+    },
+    {
+      "numero": 18,
+      "partidos": [
+        {"id": 85, "local": "Atlético Madrid", "visitante": "FC Barcelona", "fecha": "2027-01-23", "hora": "21:00"},
+        {"id": 86, "local": "Sevilla FC", "visitante": "Real Madrid", "fecha": "2027-01-24", "hora": "19:00"},
+        {"id": 87, "local": "Betis", "visitante": "Villarreal CF", "fecha": "2027-01-24", "hora": "17:00"},
+        {"id": 88, "local": "Athletic Club", "visitante": "Real Sociedad", "fecha": "2027-01-25", "hora": "21:00"},
+        {"id": 89, "local": "Valencia CF", "visitante": "Celta de Vigo", "fecha": "2027-01-25", "hora": "19:00"}
+      ]
+    }
+  ]
+}

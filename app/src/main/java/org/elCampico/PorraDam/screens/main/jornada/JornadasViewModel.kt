@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.Partido
 import org.elCampico.PorraDam.data.model.Porra
-import org.elCampico.PorraDam.screens.main.resultados.calcularPuntos
 
 class JornadasViewModel : ViewModel() {
 

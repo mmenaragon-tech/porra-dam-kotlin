@@ -1,6 +1,5 @@
 package org.elCampico.PorraDam.screens.main.resultados
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,10 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.PorraPartido
-import org.elCampico.PorraDam.data.model.ResultadoPartido
 
 class ResultadosViewModel : ViewModel() {
 
@@ -28,7 +25,7 @@ class ResultadosViewModel : ViewModel() {
         combine(todas, _jornadas, _seleccionada) { porras, jornadas, numero ->
             val ids = jornadas.firstOrNull { it.numero == numero }
                 ?.partidos?.map { it.id }?.toSet().orEmpty()
-            porras.filter { it.resultado.partido.id in ids }
+            porras.filter { it.partido.id in ids }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
     val totalPuntos: StateFlow<Int> = porrasEnviadas

@@ -38,8 +38,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.elCampico.PorraDam.data.model.Usuario
 import org.elCampico.PorraDam.model.leerColoresAvatar
-import org.elCampico.PorraDam.model.leerEquipos
-import org.elCampico.PorraDam.model.leerPartidos
 import org.elCampico.PorraDam.model.leerUsuarios
 import kotlin.random.Random
 

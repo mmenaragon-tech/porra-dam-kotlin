@@ -1,3 +1,4 @@
+
 package org.elCampico.PorraDam.model
 
 import android.content.Context
@@ -8,19 +9,20 @@ import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.Partido
 import org.elCampico.PorraDam.data.model.Porra
 import org.elCampico.PorraDam.data.model.PorraPartido
-import org.elCampico.PorraDam.data.model.ResultadoPartido
 import org.elCampico.PorraDam.data.model.Sala
 import org.elCampico.PorraDam.data.model.Usuario
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
-private fun leerArray(contexto: Context, archivo: String): JSONArray {
+private fun leerTexto(contexto: Context, archivo: String): String {
     val propio = File(contexto.filesDir, archivo)
-    val texto = if (propio.exists()) propio.readText()
+    return if (propio.exists()) propio.readText()
     else contexto.assets.open(archivo).bufferedReader().use { it.readText() }
-    return JSONArray(texto)
 }
+
+private fun leerArray(contexto: Context, archivo: String): JSONArray =
+    JSONArray(leerTexto(contexto, archivo))
 
 fun leerUsuarios(contexto: Context, colores: Map<Int, ColoresAvatar>): List<Usuario> {
     val array = leerArray(contexto, "usuarios.json")
@@ -62,26 +64,34 @@ fun leerEquipos(contexto: Context): List<Equipo> {
         Equipo(
             nombre = objeto.getString("nombre"),
             escudo = contexto.resources.getIdentifier(
-                objeto.getString("escudo"), "drawable", contexto.packageName
+                objeto.getString("escudo"),
+                "drawable",
+                contexto.packageName
             )
         )
     }
 }
 
 fun leerJornadas(contexto: Context, equipos: List<Equipo>): List<Jornada> {
-    val array = leerArray(contexto, "jornadas.json")
+    val array = JSONObject(leerTexto(contexto, "jornadas.json")).getJSONArray("jornadas")
 
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
         val partidos = objeto.getJSONArray("partidos")
+
         Jornada(
             numero = objeto.getInt("numero"),
             partidos = List(partidos.length()) { j ->
                 val p = partidos.getJSONObject(j)
+
                 Partido(
                     id = p.getInt("id"),
                     local = equipos.first { it.nombre == p.getString("local") },
-                    visitante = equipos.first { it.nombre == p.getString("visitante") }
+                    visitante = equipos.first { it.nombre == p.getString("visitante") },
+                    golesLocal = if (p.isNull("golesLocal")) null else p.getInt("golesLocal"),
+                    golesVisitante = if (p.isNull("golesVisitante")) null else p.getInt("golesVisitante"),
+                    fecha = p.getString("fecha"),
+                    hora = p.getString("hora")
                 )
             }
         )
@@ -105,28 +115,18 @@ fun leerPorras(contexto: Context): List<Porra> {
     }
 }
 
-fun leerResultados(contexto: Context, partidos: List<Partido>): List<ResultadoPartido> {
-    val array = leerArray(contexto, "resultados.json")
-
-    return List(array.length()) { i ->
-        val objeto = array.getJSONObject(i)
-        ResultadoPartido(
-            partido = partidos.first { it.id == objeto.getInt("partido") },
-            golesLocal = objeto.getInt("golesLocal"),
-            golesVisitante = objeto.getInt("golesVisitante")
-        )
-    }
-}
-
 fun leerPorrasPartido(
-    resultados: List<ResultadoPartido>,
+    partidos: List<Partido>,
     porras: List<Porra>,
     usuarioId: Int
 ): List<PorraPartido> =
-    resultados.mapNotNull { resultado ->
-        porras.firstOrNull {
-            it.usuarioId == usuarioId && it.partidoId == resultado.partido.id
-        }?.let { PorraPartido(resultado, it) }
+    partidos.map { partido ->
+        PorraPartido(
+            partido,
+            porras.firstOrNull {
+                it.usuarioId == usuarioId && it.partidoId == partido.id
+            }
+        )
     }
 
 fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
@@ -135,6 +135,7 @@ fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
     return List(array.length()) { i ->
         val objeto = array.getJSONObject(i)
         val ids = objeto.getJSONArray("usuarios")
+
         Sala(
             nombre = objeto.getString("nombre"),
             usuarios = List(ids.length()) { j ->
@@ -147,10 +148,12 @@ fun leerSalas(contexto: Context, usuarios: List<Usuario>): List<Sala> {
 
 fun guardarPorras(contexto: Context, nuevas: List<Porra>) {
     val claves = nuevas.map { it.usuarioId to it.partidoId }.toSet()
+
     val todas = leerPorras(contexto)
         .filterNot { (it.usuarioId to it.partidoId) in claves } + nuevas
 
     val array = JSONArray()
+
     todas.forEach { porra ->
         array.put(JSONObject().apply {
             put("usuario", porra.usuarioId)
@@ -159,5 +162,6 @@ fun guardarPorras(contexto: Context, nuevas: List<Porra>) {
             put("golesVisitante", porra.golesVisitante)
         })
     }
+
     File(contexto.filesDir, "porras.json").writeText(array.toString(2))
 }

@@ -2,7 +2,6 @@ package org.elCampico.PorraDam.screens.main.clasificacion
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import org.elCampico.PorraDam.data.model.Partido
 import org.elCampico.PorraDam.data.model.Usuario
 
 class ClasificacionViewModel : ViewModel() {

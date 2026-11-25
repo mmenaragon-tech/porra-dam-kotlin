@@ -21,17 +21,12 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,15 +39,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import org.elCampico.PorraDam.data.model.Jornada
 import org.elCampico.PorraDam.data.model.Usuario.Companion.USUARIO_ACTUAL
 import org.elCampico.PorraDam.model.guardarPorras
 import org.elCampico.PorraDam.model.leerEquipos
 import org.elCampico.PorraDam.model.leerJornadas
-import org.elCampico.PorraDam.model.leerPartidos
-import org.elCampico.PorraDam.model.leerPorras
-import org.elCampico.PorraDam.model.leerPorrasPartido
-import org.elCampico.PorraDam.model.leerResultados
 import org.elCampico.PorraDam.ui.theme.PorraDamTheme
 
 
@@ -108,19 +98,6 @@ fun PantallaJornada(
                 .padding(6.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            /*
-            partidos.forEachIndexed { i, (local, visitante) ->
-                PartidoItem(
-                    local = local,
-                    visitante = visitante,
-                    golesLocal = golesLocal[i],
-                    golesVisitante = golesVisitante[i],
-                    onGolesLocalChange = { golesLocal[i] = it },
-                    onGolesVisitanteChange = { golesVisitante[i] = it }
-                )
-            }
-
-            */
             itemsIndexed(vm.partidosEnviados) { i, partido ->
                 PartidoItem(
                     escudoLocal = partido.local.escudo,
@@ -133,26 +110,6 @@ fun PantallaJornada(
                     onGolesVisitanteChange = { golesVisitante[i] = it }
                 )
             }
-            /*
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(horizontal = 20.dp, vertical = 15.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = { /* guardar pronósticos */ },
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Text(
-                        "Guardar pronósticos",
-                        fontSize = 20.sp
-                    )
-                }
-            }
-
-            */
 
             item {
                 Button(
